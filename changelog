@@ -1,3 +1,61 @@
+highlighting-kate 0.5.3.8 (05 Mar 2013)
+
+  * Support mozilla rust.
+
+highlighting-kate 0.5.3.7 (20 Feb 2013)
+
+  * Bumped version bound on blaze-html to 0.7.
+
+highlighting-kate 0.5.3.6 (16 Feb 2013)
+
+  * Added support for Curry and literate Curry (Björn Peemöller).
+
+  * Added support for Julia (dcjones).
+
+  * Fixed language extensions value for asn1 (Stanley).
+
+  * Updated xml descriptions from kate repository.
+
+highlighting-kate 0.5.3.5 (19 Jan 2013)
+
+  * Reverted use of \char13 and \char18 for ' and `.
+    This is not robust enough across encodings.  Recommend using
+    upquote package instead.
+
+highlighting-kate 0.5.3.4 (04 Jan 2013)
+
+  * Don't pop context on line end if we're already at root context.
+    This helps with the erlang.xml file, which has some odd
+    `#pop`s in it. Closes #26.
+
+  * Avoid superfluous table lookup.  We find the default attribute
+    in ParseSyntaxFiles and embed it directly in the parser, rather
+    than looking it up at runtime.  This simplifies the parsers
+    and should boost performance.
+
+  * Don't pop last context in context stack.  This helps with the
+    erlang.xml file, which has some odd `#pop`s.
+
+  * Changed cabal file so library need not be recompiled for executable.
+    Moved Highlight.hs to extra/ directory.
+
+  * Fixed alignment of line numbers with lines.
+
+  * Make sure we parse the whole line when an error occurs.
+    This fixes a problem wherein ends of lines were dropped
+    after errors.
+
+highlighting-kate 0.5.3.3 (12 Oct 2012)
+
+  * LaTeX output:  Use \char13 and \char18 for ' and `.
+    Reason:  Otherwise these appear as curly quotes.
+    The upquote package can alternatively be used, but it seems better to
+    make it unnecessary to use it.
+
+  * Make line number anchors into clickable links.
+    This makes it easier to obtain the URL for a specific line
+    of code.  (Alp Mestanogullari)
+
 highlighting-kate 0.5.3.2 (07 Sep 2012)
 
   * Fixed handling of backslash in bash highlighting.

@@ -22,6 +22,7 @@ Currently, the following languages/formats are supported:
 - Cpp
 - Cs
 - Css
+- Curry
 - D
 - Diff
 - Djangotemplate
@@ -44,8 +45,10 @@ Currently, the following languages/formats are supported:
 - Javascript
 - Json
 - Jsp
+- Julia
 - Latex
 - Lex
+- LiterateCurry
 - LiterateHaskell
 - Lua
 - Makefile
@@ -75,6 +78,7 @@ Currently, the following languages/formats are supported:
 - Relaxngcompact
 - Rhtml
 - Ruby
+- Rust
 - Scala
 - Scheme
 - Sci
@@ -169,7 +173,6 @@ Thanks are due to all the authors of these syntax definitions.
 Changes have been made to the following xml files (the originals have
 been left in the directory, with .bkp extensions):
 
-- javascript.xml:  Fixed regex \s* (which matches empty string) by changes to DetectSpaces
 - perl.xml:  Fixed regexes - needed backslash-escapes before ] and ^
 - base report bugs on the github issue tracker:
 <https://github.com/jgm/highlighting-kate/issues>.
