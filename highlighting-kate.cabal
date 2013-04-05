@@ -1,6 +1,6 @@
 Name:                highlighting-kate
-Version:             0.5.3.3
-Cabal-Version:       >= 1.6
+Version:             0.5.3.8
+Cabal-Version:       >= 1.10
 Build-Type:          Simple
 Category:            Text
 Synopsis:            Syntax highlighting
@@ -20,7 +20,6 @@ Maintainer:          jgm@berkeley.edu
 Homepage:            http://github.com/jgm/highlighting-kate
 Extra-Source-Files:  README
                      changelog
-                     Highlight.hs
                      ParseSyntaxFiles.hs
                      Text/Highlighting/Kate/Syntax.hs.in
                      css/hk-espresso.css
@@ -48,6 +47,7 @@ Extra-Source-Files:  README
                      xml/cpp.xml
                      xml/cs.xml
                      xml/css.xml
+                     xml/curry.xml
                      xml/d.xml
                      xml/diff.xml
                      xml/djangotemplate.xml
@@ -71,9 +71,11 @@ Extra-Source-Files:  README
                      xml/javascript.xml.bkp
                      xml/json.xml
                      xml/jsp.xml
+                     xml/julia.xml
                      xml/language.dtd
                      xml/latex.xml
                      xml/lex.xml
+                     xml/literate-curry.xml
                      xml/literate-haskell.xml
                      xml/lua.xml
                      xml/makefile.xml
@@ -103,6 +105,7 @@ Extra-Source-Files:  README
                      xml/relaxngcompact.xml
                      xml/rhtml.xml
                      xml/ruby.xml
+                     xml/rust.xml
                      xml/scala.xml
                      xml/scheme.xml
                      xml/sci.xml
@@ -145,7 +148,7 @@ Library
     cpp-options:     -D_PCRE_LIGHT
   else
     Build-depends:   regex-pcre-builtin
-  Build-Depends:     parsec, mtl, blaze-html >= 0.4.2 && < 0.6
+  Build-Depends:     parsec, mtl, blaze-html >= 0.4.2 && < 0.7
   Exposed-Modules:   Text.Highlighting.Kate
                      Text.Highlighting.Kate.Syntax
                      Text.Highlighting.Kate.Types
@@ -175,6 +178,7 @@ Library
                      Text.Highlighting.Kate.Syntax.Cpp
                      Text.Highlighting.Kate.Syntax.Cs
                      Text.Highlighting.Kate.Syntax.Css
+                     Text.Highlighting.Kate.Syntax.Curry
                      Text.Highlighting.Kate.Syntax.D
                      Text.Highlighting.Kate.Syntax.Diff
                      Text.Highlighting.Kate.Syntax.Djangotemplate
@@ -197,8 +201,10 @@ Library
                      Text.Highlighting.Kate.Syntax.Javascript
                      Text.Highlighting.Kate.Syntax.Json
                      Text.Highlighting.Kate.Syntax.Jsp
+                     Text.Highlighting.Kate.Syntax.Julia
                      Text.Highlighting.Kate.Syntax.Latex
                      Text.Highlighting.Kate.Syntax.Lex
+                     Text.Highlighting.Kate.Syntax.LiterateCurry
                      Text.Highlighting.Kate.Syntax.LiterateHaskell
                      Text.Highlighting.Kate.Syntax.Lua
                      Text.Highlighting.Kate.Syntax.Makefile
@@ -227,6 +233,7 @@ Library
                      Text.Highlighting.Kate.Syntax.Relaxngcompact
                      Text.Highlighting.Kate.Syntax.Rhtml
                      Text.Highlighting.Kate.Syntax.Ruby
+                     Text.Highlighting.Kate.Syntax.Rust
                      Text.Highlighting.Kate.Syntax.Scala
                      Text.Highlighting.Kate.Syntax.Scheme
                      Text.Highlighting.Kate.Syntax.Sci
@@ -247,6 +254,7 @@ Library
                      Text.Highlighting.Kate.Syntax.Yaml
   -- disable optimizations; it doesn't hurt performance much and
   -- massively improves compilation speed and memory usage
+  Default-Language:    Haskell98
   Ghc-Options:       -W -O0
   Ghc-Prof-Options:  -auto-all -caf-all
   -- the following line is needed to prevent gcc from consuming huge amounts of
@@ -255,7 +263,10 @@ Library
 
 Executable Highlight
   Main-Is:          Highlight.hs
-  Build-Depends:    base, containers, blaze-html >= 0.4.2 && < 0.6, filepath
+  Build-Depends:    base, containers, blaze-html >= 0.4.2 && < 0.7, filepath,
+                    highlighting-kate
+  Hs-Source-Dirs:   extra
+  Default-Language:    Haskell98
   if flag(pcre-light)
     cpp-options:     -D_PCRE_LIGHT
   Ghc-Options:      -W -O0 -rtsopts

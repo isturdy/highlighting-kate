@@ -30,9 +30,14 @@
     <item> type      </item>
     <item> where     </item>
   </list>
+  <list name="import_keywords">
+    <item> as </item>
+    <item> qualified </item>
+    <item> hiding </item>
+  </list>
   <contexts>
     <context attribute="Nrm" lineEndContext="#stay" name="top">
-      <keyword      attribute="Kwd" context="#stay" String="reserved"        /> 
+      <keyword      attribute="Kwd" context="#stay" String="reserved"        />
       <RegExpr      attribute="Def" context="main"
          String="([a-zA-Z][a-zA-Z0-9_']*)"                                   />
       <RegExpr      attribute="Nrm" context="main"  String="\s"              />
@@ -44,15 +49,17 @@
     <context attribute="Nrm" lineEndContext="top"   name="main">
       <RegExpr      attribute="Prg" context="#stay" String="\{-#.*#-\}"      />
       <RegExpr      attribute="Cmt" context="cmt"   String="\{-[^#]?"        />
-      <RegExpr      attribute="Cmt" context="ncmt"  
+      <RegExpr      attribute="Cmt" context="ncmt"
          String="--[^\-!#\$%&amp;\*\+/&lt;=&gt;\?&#92;@\^\|~\.:].*$"        />
-      <keyword      attribute="Kwd" context="#stay" String="keywords"        />
+      <keyword      attribute="Kwd" context="#stay" String="reserved"        />
       <RegExpr      attribute="Op"  context="#stay"
          String="[\-!#\$%&amp;\*\+/&lt;=&gt;\?&#92;@\^\|~\.:]+"             />
       <AnyChar      attribute="Op"  context="#stay" String="∷⇒→←∀∃"        />
       <RegExpr      attribute="Flt" context="#stay" String="\d+\.\d+"        />
       <Int          attribute="Dec" context="#stay"                          />
-      <RegExpr      attribute="Typ" context="#stay" 
+      <RegExpr      attribute="Nrm" context="#stay"
+         String="[a-z][a-zA-Z0-9_']*"                                        />
+      <RegExpr      attribute="Typ" context="#stay"
          String="([A-Z][a-zA-Z0-9_']*\.)*[A-Z][a-zA-Z0-9_']*"                />
       <DetectChar   attribute="Chr" context="chr"   char="'"                 />
       <DetectChar   attribute="Str" context="str"   char="&quot;"            />
@@ -75,6 +82,9 @@
     <context attribute="Inf" lineEndContext="#stay" name="infix">
       <DetectChar   attribute="Inf" context="#pop" char="`"                  />
     </context>
+    <context attribute="Import Statement" lineEndContext="#pop" name="import">
+      <keyword attribute="Keyword"          context="#stay" String="import_keywords" />
+    </context>
   </contexts>
   <itemDatas>
     <itemData name="Nrm" defStyleNum="dsNormal"   spellChecking="false" />
@@ -89,6 +99,7 @@
     <itemData name="Str" defStyleNum="dsString"                         />
     <itemData name="Inf" defStyleNum="dsOthers"   spellChecking="false" />
     <itemData name="En"  defStyleNum="dsOthers"   spellChecking="false" />
+    <itemData name="Def" defStyleNum="dsOthers"   spellChecking="false" />
   </itemDatas>
   </highlighting>
   <general>

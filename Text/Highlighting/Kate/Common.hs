@@ -73,6 +73,7 @@ pushContext (lang,context) =
 popContext :: KateParser ()
 popContext = do st <- getState
                 case synStContexts st of
+                    [x]    -> return () -- stay if we're at the root
                     (_:xs) -> updateState $ \st -> st{ synStContexts = xs }
                     []     -> fail "Stack empty"
 
@@ -293,7 +294,7 @@ mkParseSourceLine parseExpression ln = do
   modify $ \st -> st{ synStLineNumber = synStLineNumber st + 1 }
   st <- get
   let lineName = "line " ++ show (synStLineNumber st)
-  let pline = do ts <- many parseExpression
+  let pline = do ts <- manyTill parseExpression eof
                  s  <- getState
                  return (s, ts)
   let (newst, result) = case runParser pline st lineName ln of
